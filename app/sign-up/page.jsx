@@ -38,8 +38,10 @@ export default function SignUp() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
+      // Os valores são capturados a partir do valor atribuido ao 'name' dos inputs (text-field)
       email: data.get("email"),
       password: data.get("password"),
+      name: data.get("name"),
     });
   };
 
@@ -71,10 +73,10 @@ export default function SignUp() {
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="name"
                   required
                   fullWidth
-                  id="firstName"
+                  id="name"
                   label="Nome"
                   autoFocus
                 />
@@ -83,9 +85,9 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
+                  id="sobrenome"
                   label="Sobrenome"
-                  name="lastName"
+                  name="sobrenome"
                   autoComplete="family-name"
                 />
               </Grid>
@@ -126,7 +128,7 @@ export default function SignUp() {
                   href={"/"}
                   className="text-blue-400 text-sm border-b border-blue-400"
                 >
-                  {"Não tem um conta? Cadastre-se"}
+                  {"Já possui uma conta? Entre agora"}
                 </Link>
               </Grid>
             </Grid>
