@@ -29,9 +29,11 @@ function Copyright(props) {
   );
 }
 
+// TODO remove, this demo shouldn't need to reset the theme.
+
 const defaultTheme = createTheme();
 
-export default function SignIn() {
+export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -43,11 +45,7 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container
-        className="h-screen flex justify-center"
-        component="main"
-        maxWidth="xs"
-      >
+      <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -60,35 +58,59 @@ export default function SignIn() {
           <Avatar className="bg-blue-800">
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" className="text-center">
-            Login
+          <Typography component="h1" variant="h5">
+            Criar conta
           </Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit}
             noValidate
-            sx={{ mt: 1 }}
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Senha"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="given-name"
+                  name="firstName"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="Nome"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Sobrenome"
+                  name="lastName"
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email"
+                  name="email"
+                  autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Senha"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                />
+              </Grid>
+            </Grid>
             <Button
               className="bg-blue-500 font-semibold"
               type="submit"
@@ -96,20 +118,12 @@ export default function SignIn() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Entrar
+              Criar conta
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link
-                  href="#"
-                  className="text-blue-400 text-sm border-b border-blue-400"
-                >
-                  Esqueceu a senha?
-                </Link>
-              </Grid>
+            <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link
-                  href={"/sign-up"}
+                  href={"/"}
                   className="text-blue-400 text-sm border-b border-blue-400"
                 >
                   {"Não tem um conta? Cadastre-se"}
