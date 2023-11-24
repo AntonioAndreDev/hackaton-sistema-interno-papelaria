@@ -14,41 +14,21 @@ import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import { Poppins } from "next/font/google";
+import "@/app/globals.css";
 import {
   mainListItems,
   secondaryListItems,
 } from "./(Main)/dashboard/listItems";
-import Deposits from "./(Main)/dashboard/Deposits";
-import { Poppins } from "next/font/google";
-import "@/app/globals.css";
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const drawerWidth = 240;
 
@@ -181,7 +161,6 @@ export default function RootLayout({ children }) {
                 <Grid container spacing={3}>
                   {children}
                 </Grid>
-                <Copyright sx={{ pt: 4 }} />
               </Container>
             </Box>
           </Box>
