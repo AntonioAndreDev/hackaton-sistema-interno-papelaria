@@ -41,7 +41,7 @@ export default function Textarea() {
    
 
     &:hover {
-        border-color: ${blue[400]};
+        border-color: #000000;
     }
 
     &:focus {
