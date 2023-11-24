@@ -1,4 +1,5 @@
-import Input from "@/app/components/Input";
+import InputNumber from "@/app/components/InputNumber";
+import InputText from "@/app/components/InputText";
 import SelectTipoDeProduto from "@/app/components/SelectTipoDeProduto";
 import Textarea from "@/app/components/Textarea";
 import Title from "@/app/components/Title";
@@ -14,12 +15,17 @@ export default function CriarProduto() {
 
       <>
         <Title text={"Insira o nome do produto *"} />
-        <Input text={"Nome do Produto"} />
+        <InputText text={"Nome do Produto"} />
       </>
 
       <>
         <Title text={"Insira a descrição do produto *"} />
         <Textarea />
+      </>
+
+      <>
+        <Title text={"Insira a quantidade em estoque do produto"} />
+        <InputNumber text={"Estoque do Produto"} />
       </>
     </main>
   );
