@@ -158,7 +158,7 @@ export default function RootLayout({ children }) {
             >
               <Toolbar />
               <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                <Grid container spacing={3}>
+                <Grid className="px-4" container spacing={3}>
                   {children}
                 </Grid>
               </Container>
