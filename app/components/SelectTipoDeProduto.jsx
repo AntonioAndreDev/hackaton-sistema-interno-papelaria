@@ -5,7 +5,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { Typography } from "@mui/material";
 import { useState } from "react";
 
 const ITEM_HEIGHT = 48;
@@ -43,19 +42,17 @@ export default function SelectTipoDeProduto() {
 
   return (
     <div>
-      <Typography className="mb-2 font-semibold text-xl">
-        Selecione o tipo do produto*
-      </Typography>
       <FormControl sx={{ width: 300 }}>
         <InputLabel className="text-lg" id="demo-multiple-name-label">
-          Tipo de Produto
+          Tipo de Produto *
         </InputLabel>
         <Select
+          required
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
           value={tipoDeProduto}
           onChange={handleChange}
-          input={<OutlinedInput label="Tipo de Produto" />}
+          input={<OutlinedInput label="Tipo de Produto *" />}
           MenuProps={MenuProps}
         >
           {tipos.map((tipo) => (
