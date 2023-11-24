@@ -117,11 +117,7 @@ export default function RootLayout({ children }) {
                 >
                   Dashboard
                 </Typography>
-                <IconButton color="inherit">
-                  <Badge badgeContent={4} color="secondary">
-                    <NotificationsIcon />
-                  </Badge>
-                </IconButton>
+                <h1>{`Seja bem vindo, { nome }`}</h1>
               </Toolbar>
             </AppBar>
             <Drawer variant="permanent" open={open}>
