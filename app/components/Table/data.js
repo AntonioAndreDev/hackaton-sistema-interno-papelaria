@@ -1,19 +1,14 @@
-import React from "react";
 const columns = [
   { name: "ID", uid: "id", sortable: true },
-  { name: "NAME", uid: "name", sortable: true },
-  { name: "AGE", uid: "age", sortable: true },
-  { name: "ROLE", uid: "role", sortable: true },
-  { name: "TEAM", uid: "team" },
-  { name: "EMAIL", uid: "email" },
-  { name: "STATUS", uid: "status", sortable: true },
-  { name: "ACTIONS", uid: "actions" },
+  { name: "NOME", uid: "name", sortable: true },
+  { name: "TIPO DE PRODUTO", uid: "status", sortable: true },
+  { name: "AÇÕES", uid: "actions" },
 ];
 
 const statusOptions = [
-  { name: "Active", uid: "active" },
-  { name: "Paused", uid: "paused" },
-  { name: "Vacation", uid: "vacation" },
+  { name: "artigos de papelaria", uid: "artigos de papelaria" },
+  { name: "material escolar", uid: "material escolar" },
+  { name: "material técnico", uid: "material técnico" },
 ];
 
 const users = [

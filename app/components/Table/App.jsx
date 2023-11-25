@@ -23,6 +23,7 @@ import { SearchIcon } from "./SearchIcon";
 import { ChevronDownIcon } from "./ChevronDownIcon";
 import { columns, users, statusOptions } from "./data";
 import { capitalize } from "./utils";
+import Link from "next/link";
 
 const statusColorMap = {
   active: "success",
@@ -30,7 +31,7 @@ const statusColorMap = {
   vacation: "warning",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"];
+const INITIAL_VISIBLE_COLUMNS = ["name", "status", "actions"];
 
 export default function App() {
   const [filterValue, setFilterValue] = React.useState("");
@@ -125,9 +126,9 @@ export default function App() {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu>
-                <DropdownItem>View</DropdownItem>
-                <DropdownItem>Edit</DropdownItem>
-                <DropdownItem>Delete</DropdownItem>
+                <DropdownItem>Visualizar</DropdownItem>
+                <DropdownItem>Editar</DropdownItem>
+                <DropdownItem>Deletar</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
@@ -175,7 +176,7 @@ export default function App() {
           <Input
             isClearable
             className="w-full sm:max-w-[44%]"
-            placeholder="Search by name..."
+            placeholder="Procurar pelo nome..."
             startContent={<SearchIcon />}
             value={filterValue}
             onClear={() => onClear()}
@@ -185,7 +186,7 @@ export default function App() {
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
                 <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
-                  Status
+                  Tipo de Produto
                 </Button>
               </DropdownTrigger>
               <DropdownMenu
@@ -206,7 +207,7 @@ export default function App() {
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
                 <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
-                  Columns
+                  Colunas
                 </Button>
               </DropdownTrigger>
               <DropdownMenu
@@ -224,15 +225,17 @@ export default function App() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button color="primary" endContent={<PlusIcon />}>
-              Add New
-            </Button>
+            <Link href={"/criar-produto"}>
+              <Button color="primary" endContent={<PlusIcon />}>
+                Adicionar Novo Produto
+              </Button>
+            </Link>
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">Total {users.length} users</span>
+          <span className="text-default-400 text-small">Total {users.length} produtos</span>
           <label className="flex items-center text-default-400 text-small">
-            Rows per page:
+            Produtos por página:
             <select
               className="bg-transparent outline-none text-default-400 text-small"
               onChange={onRowsPerPageChange}
@@ -260,8 +263,8 @@ export default function App() {
       <div className="py-2 px-2 flex justify-between items-center">
         <span className="w-[30%] text-small text-default-400">
           {selectedKeys === "all"
-            ? "All items selected"
-            : `${selectedKeys.size} of ${filteredItems.length} selected`}
+            ? "Todos os produtos selecionados"
+            : `${selectedKeys.size} de ${filteredItems.length} produtos selecionados`}
         </span>
         <Pagination
           isCompact
@@ -274,10 +277,10 @@ export default function App() {
         />
         <div className="hidden sm:flex w-[30%] justify-end gap-2">
           <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}>
-            Previous
+            Anterior
           </Button>
           <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onNextPage}>
-            Next
+            Próximo
           </Button>
         </div>
       </div>
