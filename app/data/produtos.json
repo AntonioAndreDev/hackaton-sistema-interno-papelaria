@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "tipoProduto": "Artigos de Papelaria",
+    "nomeProduto": "Caneta",
+    "precoProduto": 2.5,
+    "descricao": "Caneta azul",
+    "quantidadeProduto": 10,
+    "urlImagem": "https://www.papelariauniversitaria.com.br/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/c/a/caneta-bic-cristal-azul.jpg"
+  }
+]
