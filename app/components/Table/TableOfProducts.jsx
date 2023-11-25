@@ -124,7 +124,7 @@ export default function TableOfProducts() {
               </DropdownTrigger>
               <DropdownMenu>
                 <DropdownItem>Visualizar</DropdownItem>
-                <DropdownItem>Editar</DropdownItem>
+                <DropdownItem href={`/editar-produto/${user.id}`}>Editar</DropdownItem>
                 <DropdownItem>Deletar</DropdownItem>
               </DropdownMenu>
             </Dropdown>
