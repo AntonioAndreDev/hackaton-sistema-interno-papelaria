@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InputNumber from "@/app/components/InputNumber";
 import InputText from "@/app/components/InputText";
 import SelectTipoDeProduto from "@/app/components/SelectTipoDeProduto";
@@ -13,15 +13,37 @@ export default function CriarProduto() {
   const [estoqueProduto, setEstoqueProduto] = useState("");
   const [imagemProduto, setImagemProduto] = useState("");
   const [valorProduto, setValorProduto] = useState("");
+  const [camposValidos, setCamposValidos] = useState(false);
 
-  const handleSubmit = () => {};
+  function validarCampos() {
+    if (
+      nomeProduto.length > 0 &&
+      tipoProduto.length > 0 &&
+      descricaoProduto.length > 0 &&
+      estoqueProduto.length > 0 &&
+      imagemProduto.length > 0 &&
+      valorProduto.length > 0
+    ) {
+      setCamposValidos(true);
+    } else {
+      setCamposValidos(false);
+    }
+  }
 
-  console.log("Nome " + nomeProduto);
-  console.log("Tipo " + tipoProduto);
-  console.log("Descrição " + descricaoProduto);
-  console.log("Estoque " + estoqueProduto);
-  console.log("Imagem produto URL " + imagemProduto);
-  console.log("Valor " + valorProduto);
+  useEffect(() => {
+    validarCampos();
+  }, [
+    nomeProduto,
+    tipoProduto,
+    descricaoProduto,
+    estoqueProduto,
+    imagemProduto,
+    valorProduto,
+  ]);
+
+  const handleSubmit = () => {
+    console.log(camposValidos);
+  };
 
   return (
     <main>
@@ -56,6 +78,7 @@ export default function CriarProduto() {
         <Title text={"Insira a quantidade em estoque do produto *"} />
         <InputNumber
           onChange={(ev) => setEstoqueProduto(ev.target.value)}
+          value={estoqueProduto}
           text={"Estoque do Produto"}
         />
       </>
