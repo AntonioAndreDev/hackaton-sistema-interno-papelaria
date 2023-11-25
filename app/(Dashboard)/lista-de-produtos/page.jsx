@@ -1,9 +1,10 @@
-import Table from "@/app/components/Table/App";
+"use client";
+import TableOfProducts from "@/app/components/Table/TableOfProducts";
 
 export default function ListaDeProdutos() {
   return (
     <div>
-      <Table />
+      <TableOfProducts />
     </div>
   );
 }

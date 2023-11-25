@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import {
   Table,
@@ -27,7 +26,7 @@ import Link from "next/link";
 
 const INITIAL_VISIBLE_COLUMNS = ["name", "tipoDeProduto", "actions"];
 
-export default function App() {
+export default function TableOfProducts() {
   const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
   const [visibleColumns, setVisibleColumns] = React.useState(new Set(INITIAL_VISIBLE_COLUMNS));

@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 const columns = [
   { name: "ID", uid: "id", sortable: true },
   { name: "NOME", uid: "name", sortable: true },
@@ -15,8 +13,8 @@ const opcoesDeTipo = [
 
 const produtos = [];
 
-useEffect(() => {
-  if (typeof window !== undefined) {
+if (typeof window !== "undefined") {
+  window.addEventListener("load", () => {
     const produtosJson = JSON.parse(localStorage.getItem("produtos"));
 
     console.log(produtos);
@@ -31,7 +29,7 @@ useEffect(() => {
 
       produtos.push(novoProduto);
     }
-  }
-});
+  });
+}
 
 export { columns, produtos, opcoesDeTipo };
