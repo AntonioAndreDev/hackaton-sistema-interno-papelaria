@@ -14,20 +14,18 @@ const opcoesDeTipo = [
 const produtos = [];
 
 if (typeof window !== "undefined") {
-  window.addEventListener("load", () => {
-    const produtosJson = JSON.parse(localStorage.getItem("produtos"));
+  const produtosJson = JSON.parse(localStorage.getItem("produtos"));
 
-    for (let i = 0; i < produtosJson?.length; i++) {
-      const novoProduto = {
-        id: produtosJson[i].id,
-        name: produtosJson[i].name,
-        tipoDeProduto: produtosJson[i].tipoDeProduto.toLowerCase(),
-        avatar: produtosJson[i].imagem,
-      };
+  for (let i = 0; i < produtosJson?.length; i++) {
+    const novoProduto = {
+      id: produtosJson[i].id,
+      name: produtosJson[i].name,
+      tipoDeProduto: produtosJson[i].tipoDeProduto.toLowerCase(),
+      avatar: produtosJson[i].imagem,
+    };
 
-      produtos.push(novoProduto);
-    }
-  });
+    produtos.push(novoProduto);
+  }
 }
 
 export { columns, produtos, opcoesDeTipo };
