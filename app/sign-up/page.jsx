@@ -13,12 +13,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function Copyright(props) {
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         Your Website
@@ -34,15 +29,42 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUp() {
+  const validacao = {
+    validateName(name) {
+      return name.length >= 3;
+    },
+    validateLastName(lastName) {
+      return lastName.length >= 3;
+    },
+    validatePassword(password) {
+      const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
+      return regex.test(password);
+    },
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      // Os valores são capturados a partir do valor atribuido ao 'name' dos inputs (text-field)
-      email: data.get("email"),
-      password: data.get("password"),
-      name: data.get("name"),
-    });
+    const nome = data.get("name");
+    const sobrenome = data.get("sobrenome");
+    const senha = data.get("password");
+
+    if (!validacao.validateName(nome)) {
+      alert("Nome inválido");
+      return;
+    }
+
+    if (!validacao.validateLastName(sobrenome)) {
+      alert("Sobrenome inválido");
+      return;
+    }
+
+    if (!validacao.validatePassword(senha)) {
+      alert("Senha fraca");
+      return;
+    }
+
+    console.log({ nome, sobrenome, senha });
   };
 
   return (
@@ -63,12 +85,7 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Criar conta
           </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -91,7 +108,7 @@ export default function SignUp() {
                   autoComplete="family-name"
                 />
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -100,7 +117,7 @@ export default function SignUp() {
                   name="email"
                   autoComplete="email"
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <TextField
                   required
@@ -124,10 +141,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link
-                  href={"/"}
-                  className="text-blue-400 text-sm border-b border-blue-400"
-                >
+                <Link href={"/"} className="text-blue-400 text-sm border-b border-blue-400">
                   {"Já possui uma conta? Entre agora"}
                 </Link>
               </Grid>
