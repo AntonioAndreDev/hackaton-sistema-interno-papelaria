@@ -20,7 +20,7 @@ const MenuProps = {
 
 const tipos = ["Artigos de Papelaria", "Material Escolar", "Material Técnico"];
 
-export default function SelectTipoDeProduto({ onChange, value }) {
+export default function SelectTipoDeProduto({ onChange, value, required = true }) {
   const theme = useTheme();
 
   return (
@@ -30,12 +30,12 @@ export default function SelectTipoDeProduto({ onChange, value }) {
           Tipo de Produto *
         </InputLabel>
         <Select
-          required
+          required={required}
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
           value={value}
           onChange={onChange}
-          input={<OutlinedInput label="Tipo de Produto *" />}
+          input={<OutlinedInput label="Tipo de Produto" />}
           MenuProps={MenuProps}
         >
           {tipos.map((tipo) => (

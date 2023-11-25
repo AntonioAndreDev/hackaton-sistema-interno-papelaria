@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
-export default function InputText({ text, autoFocus = false, onChange, value }) {
+export default function InputText({ text, autoFocus = false, onChange, value, required = true }) {
   return (
     <Box
       component="form"
@@ -14,7 +14,7 @@ export default function InputText({ text, autoFocus = false, onChange, value }) 
       <TextField
         onChange={onChange}
         value={value}
-        required
+        required={required}
         id="outlined-basic"
         variant="outlined"
         type="text"
