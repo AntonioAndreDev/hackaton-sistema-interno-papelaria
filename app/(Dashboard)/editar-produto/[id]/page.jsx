@@ -18,6 +18,12 @@ export default function EditarProduto({ params }) {
   const [camposValidos, setCamposValidos] = useState(false);
   const [produto, setProduto] = useState([]);
 
+  useEffect(() => {
+    const produtos = JSON.parse(localStorage.getItem("produtos"));
+    const produto = produtos.find((produto) => produto.id === params.id);
+    setProduto(produto);
+  }, []);
+
   function validarCampos() {
     if (
       nomeProduto.length > 0 &&
@@ -71,12 +77,6 @@ export default function EditarProduto({ params }) {
       alert("Preencha todos os campos!");
     }
   };
-
-  useEffect(() => {
-    const produtos = JSON.parse(localStorage.getItem("produtos"));
-    const produto = produtos.find((produto) => produto.id === params.id);
-    setProduto(produto);
-  }, []);
 
   return (
     <div>
