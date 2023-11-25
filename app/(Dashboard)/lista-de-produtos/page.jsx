@@ -1,4 +1,4 @@
-import Link from "next/link";
+"use client";
 import Table from "@/app/components/Table/App";
 
 export default function ListaDeProdutos() {
