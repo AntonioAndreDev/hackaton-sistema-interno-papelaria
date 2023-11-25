@@ -6,6 +6,7 @@ import SelectTipoDeProduto from "@/app/components/SelectTipoDeProduto";
 import Textarea from "@/app/components/Textarea";
 import Title from "@/app/components/Title";
 import ButtonComponent from "@/app/components/ButtonComponent";
+import { v4 as uuidv4 } from "uuid";
 
 export default function CriarProduto() {
   const [nomeProduto, setNomeProduto] = useState("");
@@ -51,6 +52,7 @@ export default function CriarProduto() {
         }
 
         const produto = {
+          id: uuidv4(),
           name: nomeProduto,
           tipoDeProduto: tipoProduto,
           descricao: descricaoProduto,

@@ -21,7 +21,7 @@ if (typeof window !== "undefined") {
 
     for (let i = 0; i < produtosJson?.length; i++) {
       const novoProduto = {
-        id: i + 1,
+        id: produtosJson[i].id,
         name: produtosJson[i].name,
         tipoDeProduto: produtosJson[i].tipoDeProduto.toLowerCase(),
         avatar: produtosJson[i].imagem,
