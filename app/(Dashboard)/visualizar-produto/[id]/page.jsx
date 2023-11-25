@@ -14,7 +14,22 @@ export default function VisualizarProduto({ params }) {
 
   return (
     <main>
-      <h1></h1>
+      <img className="w-1/4" src={produto.imagem} alt={`Imagem de ${produto.name}`} />
+      <h1>
+        <strong>Nome:</strong> {produto.name}
+      </h1>
+      <h6>
+        <strong>Estoque:</strong> {produto.estoque}
+      </h6>
+      <h6>
+        <strong>Valor:</strong> R${produto.valor}
+      </h6>
+      <h6>
+        <strong>Tipo:</strong> {produto.tipoDeProduto}
+      </h6>
+      <h6>
+        <strong>Descrição:</strong> {produto.descricao}
+      </h6>
     </main>
   );
 }
