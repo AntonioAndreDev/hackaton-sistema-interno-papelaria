@@ -32,17 +32,21 @@ export default function CriarProduto() {
 
   useEffect(() => {
     validarCampos();
-  }, [
-    nomeProduto,
-    tipoProduto,
-    descricaoProduto,
-    estoqueProduto,
-    imagemProduto,
-    valorProduto,
-  ]);
+  }, [nomeProduto, tipoProduto, descricaoProduto, estoqueProduto, imagemProduto, valorProduto]);
 
   const handleSubmit = () => {
-    console.log("Campos Válidos: ", camposValidos);
+    if (camposValidos) {
+      const confirmarCriacao = confirm(
+        `Deseja criar o seguinte produto? \n Nome: ${nomeProduto} \n Tipo: ${tipoProduto} \n Descrição: ${descricaoProduto} \n Estoque: ${estoqueProduto} \n Imagem: ${imagemProduto} \n Valor: ${valorProduto}`
+      );
+      if (confirmarCriacao) {
+        alert("Produto criado com sucesso!");
+      } else {
+        alert("Produto não criado!");
+      }
+    } else {
+      alert("Preencha todos os campos!");
+    }
   };
 
   return (
