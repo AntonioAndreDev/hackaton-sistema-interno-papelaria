@@ -21,7 +21,7 @@ import { PlusIcon } from "./PlusIcon";
 import { VerticalDotsIcon } from "./VerticalDotsIcon";
 import { SearchIcon } from "./SearchIcon";
 import { ChevronDownIcon } from "./ChevronDownIcon";
-import { columns, users, statusOptions } from "./data";
+import { columns, produtos, statusOptions } from "./data";
 import { capitalize } from "./utils";
 import Link from "next/link";
 
@@ -54,21 +54,21 @@ export default function App() {
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
-    let filteredUsers = [...users];
+    let filteredProdutos = [...produtos];
 
     if (hasSearchFilter) {
-      filteredUsers = filteredUsers.filter((user) =>
+      filteredProdutos = filteredProdutos.filter((user) =>
         user.name.toLowerCase().includes(filterValue.toLowerCase())
       );
     }
     if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
-      filteredUsers = filteredUsers.filter((user) =>
+      filteredProdutos = filteredProdutos.filter((user) =>
         Array.from(statusFilter).includes(user.status)
       );
     }
 
-    return filteredUsers;
-  }, [users, filterValue, statusFilter]);
+    return filteredProdutos;
+  }, [produtos, filterValue, statusFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -233,7 +233,7 @@ export default function App() {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">Total {users.length} produtos</span>
+          <span className="text-default-400 text-small">Total {produtos.length} produtos</span>
           <label className="flex items-center text-default-400 text-small">
             Produtos por página:
             <select
@@ -253,7 +253,7 @@ export default function App() {
     statusFilter,
     visibleColumns,
     onRowsPerPageChange,
-    users.length,
+    produtos.length,
     onSearchChange,
     hasSearchFilter,
   ]);
@@ -315,7 +315,7 @@ export default function App() {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No users found"} items={sortedItems}>
+      <TableBody emptyContent={"Nenhum produto encontrado"} items={sortedItems}>
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}

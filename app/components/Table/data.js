@@ -11,7 +11,7 @@ const statusOptions = [
   { name: "material técnico", uid: "material técnico" },
 ];
 
-const users = [
+const produtos = [
   {
     id: 1,
     name: "Tony Reichert",
@@ -214,4 +214,4 @@ const users = [
   },
 ];
 
-export { columns, users, statusOptions };
+export { columns, produtos, statusOptions };
