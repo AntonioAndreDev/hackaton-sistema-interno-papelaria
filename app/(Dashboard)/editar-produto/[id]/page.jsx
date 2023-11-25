@@ -26,11 +26,11 @@ export default function EditarProduto({ params }) {
 
   function validarCampos() {
     if (
-      nomeProduto.length > 0 &&
-      tipoProduto.length > 0 &&
-      descricaoProduto.length > 0 &&
-      estoqueProduto.length > 0 &&
-      imagemProduto.length > 0 &&
+      nomeProduto.length > 0 ||
+      tipoProduto.length > 0 ||
+      descricaoProduto.length > 0 ||
+      estoqueProduto.length > 0 ||
+      imagemProduto.length > 0 ||
       valorProduto.length > 0
     ) {
       setCamposValidos(true);
@@ -45,36 +45,34 @@ export default function EditarProduto({ params }) {
 
   const handleSubmit = () => {
     if (camposValidos) {
-      const confirmarCriacao = confirm(
-        `Deseja criar o seguinte produto? \n Nome: ${nomeProduto} \n Tipo: ${tipoProduto} \n Descrição: ${descricaoProduto} \n Estoque: ${estoqueProduto} \n Imagem: ${imagemProduto} \n Valor: ${valorProduto}`
+      const confirmarEdicao = confirm(
+        `Deseja editar o seguinte produto? \n Nome: ${nomeProduto || produto.name} \n Tipo: ${
+          tipoProduto || produto.tipoDeProduto
+        } \n Descrição: ${descricaoProduto || produto.descricao} \n Estoque: ${
+          estoqueProduto || produto.estoque
+        } \n Imagem: ${imagemProduto || produto.imagem} \n Valor: ${valorProduto || produto.valor}`
       );
 
-      if (confirmarCriacao) {
-        const produtos = JSON.parse(localStorage.getItem("produtos")) || [];
-        const produtoExistente = produtos.find((item) => item.name === nomeProduto);
-
-        if (produtoExistente) {
-          alert("Produto já existe!");
-          return;
-        }
-
-        const produto = {
-          id: uuidv4(),
-          name: nomeProduto,
-          tipoDeProduto: tipoProduto,
-          descricao: descricaoProduto,
-          estoque: estoqueProduto,
-          imagem: imagemProduto,
-          valor: valorProduto,
+      if (confirmarEdicao) {
+        const produtos = JSON.parse(localStorage.getItem("produtos"));
+        const produtoIndex = produtos.findIndex((p) => p.id === params.id);
+        const updatedProduto = {
+          ...produto,
+          name: nomeProduto || produto.name,
+          tipoDeProduto: tipoProduto || produto.tipoDeProduto,
+          descricao: descricaoProduto || produto.descricao,
+          estoque: estoqueProduto || produto.estoque,
+          imagem: imagemProduto || produto.imagem,
+          valor: valorProduto || produto.valor,
         };
-
-        produtos.push(produto);
+        produtos[produtoIndex] = updatedProduto;
         localStorage.setItem("produtos", JSON.stringify(produtos));
+        setProduto(updatedProduto);
       } else {
-        alert("Produto não criado!");
+        alert("Produto não editado!");
       }
     } else {
-      alert("Preencha todos os campos!");
+      alert("Edite pelo menos um campo!");
     }
   };
 
