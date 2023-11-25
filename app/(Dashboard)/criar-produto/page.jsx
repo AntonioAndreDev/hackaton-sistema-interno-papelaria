@@ -9,13 +9,13 @@ export default function CriarProduto() {
     <main>
       <h1 className="text-3xl mb-4">Adicione um novo produto</h1>
       <>
-        <Title text={"Selecione o tipo do produto *"} />
-        <SelectTipoDeProduto />
+        <Title text={"Insira o nome do produto *"} />
+        <InputText autoFocus={true} text={"Nome do Produto"} />
       </>
 
       <>
-        <Title text={"Insira o nome do produto *"} />
-        <InputText text={"Nome do Produto"} />
+        <Title text={"Selecione o tipo do produto *"} />
+        <SelectTipoDeProduto />
       </>
 
       <>
@@ -24,7 +24,7 @@ export default function CriarProduto() {
       </>
 
       <>
-        <Title text={"Insira a quantidade em estoque do produto"} />
+        <Title text={"Insira a quantidade em estoque do produto *"} />
         <InputNumber text={"Estoque do Produto"} />
       </>
     </main>
