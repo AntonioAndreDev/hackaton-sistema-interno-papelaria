@@ -42,23 +42,24 @@ export default function CriarProduto() {
       );
 
       if (confirmarCriacao) {
+        const produtos = JSON.parse(localStorage.getItem("produtos")) || [];
+        const produtoExistente = produtos.find((item) => item.name === nomeProduto);
+
+        if (produtoExistente) {
+          alert("Produto já existe!");
+          return;
+        }
+
         const produto = {
-          nome: nomeProduto,
-          tipo: tipoProduto,
+          name: nomeProduto,
+          tipoDeProduto: tipoProduto,
           descricao: descricaoProduto,
           estoque: estoqueProduto,
           imagem: imagemProduto,
           valor: valorProduto,
         };
 
-        const produtos = JSON.parse(localStorage.getItem("produtos")) || [];
-        if (produtos.map((item) => item.nome).includes(nomeProduto)) {
-          alert("Produto já existe!");
-          return;
-        } else {
-          produtos.push(produto);
-        }
-
+        produtos.push(produto);
         localStorage.setItem("produtos", JSON.stringify(produtos));
       } else {
         alert("Produto não criado!");
