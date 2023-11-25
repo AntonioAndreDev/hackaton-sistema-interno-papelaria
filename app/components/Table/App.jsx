@@ -21,23 +21,17 @@ import { PlusIcon } from "./PlusIcon";
 import { VerticalDotsIcon } from "./VerticalDotsIcon";
 import { SearchIcon } from "./SearchIcon";
 import { ChevronDownIcon } from "./ChevronDownIcon";
-import { columns, produtos, statusOptions } from "./data";
+import { columns, produtos, opcoesDeTipo } from "./data";
 import { capitalize } from "./utils";
 import Link from "next/link";
 
-const statusColorMap = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
-};
-
-const INITIAL_VISIBLE_COLUMNS = ["name", "status", "actions"];
+const INITIAL_VISIBLE_COLUMNS = ["name", "tipoDeProduto", "actions"];
 
 export default function App() {
   const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
   const [visibleColumns, setVisibleColumns] = React.useState(new Set(INITIAL_VISIBLE_COLUMNS));
-  const [statusFilter, setStatusFilter] = React.useState("all");
+  const [tipoDeProdutoFilter, setTipoDeProdutoFilter] = React.useState("all");
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState({
     column: "age",
@@ -54,21 +48,24 @@ export default function App() {
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
-    let filteredProdutos = [...produtos];
+    let produtosFiltrados = [...produtos];
 
     if (hasSearchFilter) {
-      filteredProdutos = filteredProdutos.filter((user) =>
+      produtosFiltrados = produtosFiltrados.filter((user) =>
         user.name.toLowerCase().includes(filterValue.toLowerCase())
       );
     }
-    if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
-      filteredProdutos = filteredProdutos.filter((user) =>
-        Array.from(statusFilter).includes(user.status)
+    if (
+      tipoDeProdutoFilter !== "all" &&
+      Array.from(tipoDeProdutoFilter).length !== opcoesDeTipo.length
+    ) {
+      produtosFiltrados = produtosFiltrados.filter((user) =>
+        Array.from(tipoDeProdutoFilter).includes(user.tipoDeProduto)
       );
     }
 
-    return filteredProdutos;
-  }, [produtos, filterValue, statusFilter]);
+    return produtosFiltrados;
+  }, [produtos, filterValue, tipoDeProdutoFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -110,9 +107,9 @@ export default function App() {
             <p className="text-bold text-tiny capitalize text-default-400">{user.team}</p>
           </div>
         );
-      case "status":
+      case "tipoDeProduto":
         return (
-          <Chip className="capitalize" color={statusColorMap[user.status]} size="sm" variant="flat">
+          <Chip className="capitalize" size="sm" variant="flat">
             {cellValue}
           </Chip>
         );
@@ -178,6 +175,7 @@ export default function App() {
             className="w-full sm:max-w-[44%]"
             placeholder="Procurar pelo nome..."
             startContent={<SearchIcon />}
+            tatus
             value={filterValue}
             onClear={() => onClear()}
             onValueChange={onSearchChange}
@@ -193,13 +191,13 @@ export default function App() {
                 disallowEmptySelection
                 aria-label="Table Columns"
                 closeOnSelect={false}
-                selectedKeys={statusFilter}
+                selectedKeys={tipoDeProdutoFilter}
                 selectionMode="multiple"
-                onSelectionChange={setStatusFilter}
+                onSelectionChange={setTipoDeProdutoFilter}
               >
-                {statusOptions.map((status) => (
-                  <DropdownItem key={status.uid} className="capitalize">
-                    {capitalize(status.name)}
+                {opcoesDeTipo.map((tipo) => (
+                  <DropdownItem key={tipo.uid} className="capitalize">
+                    {capitalize(tipo.name)}
                   </DropdownItem>
                 ))}
               </DropdownMenu>
@@ -250,7 +248,7 @@ export default function App() {
     );
   }, [
     filterValue,
-    statusFilter,
+    tipoDeProdutoFilter,
     visibleColumns,
     onRowsPerPageChange,
     produtos.length,
@@ -315,7 +313,7 @@ export default function App() {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"Nenhum produto encontrado"} items={sortedItems}>
+      <TableBody emptyContent={"Produto não encontrado"} items={sortedItems}>
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
