@@ -1,3 +1,4 @@
+"use client";
 const columns = [
   { name: "ID", uid: "id", sortable: true },
   { name: "NOME", uid: "name", sortable: true },

@@ -21,7 +21,7 @@ import { PlusIcon } from "./PlusIcon";
 import { VerticalDotsIcon } from "./VerticalDotsIcon";
 import { SearchIcon } from "./SearchIcon";
 import { ChevronDownIcon } from "./ChevronDownIcon";
-import { columns, produtos, opcoesDeTipo } from "./data";
+import { columns, produtos, opcoesDeTipo } from "./data.jsx";
 import { capitalize } from "./utils";
 import Link from "next/link";
 
