@@ -17,8 +17,6 @@ if (typeof window !== "undefined") {
   window.addEventListener("load", () => {
     const produtosJson = JSON.parse(localStorage.getItem("produtos"));
 
-    console.log(produtos);
-
     for (let i = 0; i < produtosJson?.length; i++) {
       const novoProduto = {
         id: produtosJson[i].id,
