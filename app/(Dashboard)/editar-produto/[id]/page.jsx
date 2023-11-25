@@ -6,7 +6,6 @@ import InputText from "@/app/components/InputText";
 import SelectTipoDeProduto from "@/app/components/SelectTipoDeProduto";
 import Textarea from "@/app/components/Textarea";
 import Title from "@/app/components/Title";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function EditarProduto({ params }) {
@@ -17,6 +16,7 @@ export default function EditarProduto({ params }) {
   const [imagemProduto, setImagemProduto] = useState("");
   const [valorProduto, setValorProduto] = useState("");
   const [camposValidos, setCamposValidos] = useState(false);
+  const [produto, setProduto] = useState([]);
 
   function validarCampos() {
     if (
@@ -72,9 +72,11 @@ export default function EditarProduto({ params }) {
     }
   };
 
-  const produtos = JSON.parse(localStorage.getItem("produtos"));
-  const produto = produtos.find((produto) => produto.id === params.id);
-  console.log(produto);
+  useEffect(() => {
+    const produtos = JSON.parse(localStorage.getItem("produtos"));
+    const produto = produtos.find((produto) => produto.id === params.id);
+    setProduto(produto);
+  }, []);
 
   return (
     <div>
@@ -94,7 +96,6 @@ export default function EditarProduto({ params }) {
         <div className="flex gap-1">
           <strong>Estoque:</strong> <h5>{produto.estoque}</h5> <br />
         </div>
-
         <div className="flex gap-1">
           <strong>Valor:</strong> <h5>{produto.valor}</h5> <br />
         </div>
