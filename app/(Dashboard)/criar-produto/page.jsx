@@ -40,8 +40,16 @@ export default function CriarProduto() {
       const confirmarCriacao = confirm(
         `Deseja criar o seguinte produto? \n Nome: ${nomeProduto} \n Tipo: ${tipoProduto} \n Descrição: ${descricaoProduto} \n Estoque: ${estoqueProduto} \n Imagem: ${imagemProduto} \n Valor: ${valorProduto}`
       );
+
       if (confirmarCriacao) {
-        alert("Produto criado com sucesso!");
+        const produto = {
+          nome: nomeProduto,
+          tipo: tipoProduto,
+          descricao: descricaoProduto,
+          estoque: estoqueProduto,
+          imagem: imagemProduto,
+          valor: valorProduto,
+        };
       } else {
         alert("Produto não criado!");
       }
