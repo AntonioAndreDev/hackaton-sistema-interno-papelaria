@@ -50,6 +50,16 @@ export default function CriarProduto() {
           imagem: imagemProduto,
           valor: valorProduto,
         };
+
+        const produtos = JSON.parse(localStorage.getItem("produtos")) || [];
+        if (produtos.map((item) => item.nome).includes(nomeProduto)) {
+          alert("Produto já existe!");
+          return;
+        } else {
+          produtos.push(produto);
+        }
+
+        localStorage.setItem("produtos", JSON.stringify(produtos));
       } else {
         alert("Produto não criado!");
       }
