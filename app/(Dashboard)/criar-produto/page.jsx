@@ -42,7 +42,7 @@ export default function CriarProduto() {
   ]);
 
   const handleSubmit = () => {
-    console.log(camposValidos);
+    console.log("Campos Válidos: ", camposValidos);
   };
 
   return (
@@ -56,6 +56,11 @@ export default function CriarProduto() {
           autoFocus={true}
           text={"Nome do Produto"}
         />
+        {nomeProduto.length === 0 && (
+          <p className="text-xs font-medium italic mb-4 text-red-400">
+            Nome do produto é obrigatório
+          </p>
+        )}
       </>
 
       <>
@@ -64,6 +69,11 @@ export default function CriarProduto() {
           onChange={(ev) => setTipoProduto(ev.target.value)}
           value={tipoProduto}
         />
+        {tipoProduto.length === 0 && (
+          <p className="text-xs font-medium italic mb-4 text-red-400">
+            Tipo do produto é obrigatório
+          </p>
+        )}
       </>
 
       <>
@@ -72,6 +82,11 @@ export default function CriarProduto() {
           onChange={(ev) => setDescricaoProduto(ev.target.value)}
           value={descricaoProduto}
         />
+        {descricaoProduto.length === 0 && (
+          <p className="text-xs font-medium italic mb-4 text-red-400">
+            Descrição do produto é obrigatório
+          </p>
+        )}
       </>
 
       <>
@@ -81,6 +96,11 @@ export default function CriarProduto() {
           value={estoqueProduto}
           text={"Estoque do Produto"}
         />
+        {estoqueProduto.length === 0 && (
+          <p className="text-xs font-medium italic mb-4 text-red-400">
+            Estoque do produto é obrigatório
+          </p>
+        )}
       </>
 
       <>
@@ -90,6 +110,11 @@ export default function CriarProduto() {
           value={imagemProduto}
           text={"URL da imagem"}
         />
+        {imagemProduto.length === 0 && (
+          <p className="text-xs font-medium italic mb-4 text-red-400">
+            Imagem do produto é obrigatório
+          </p>
+        )}
       </>
 
       <>
@@ -99,6 +124,11 @@ export default function CriarProduto() {
           value={valorProduto}
           text={"Valor do produto"}
         />
+        {valorProduto.length === 0 && (
+          <p className="text-xs font-medium italic mb-4 text-red-400">
+            Valor do produto é obrigatório
+          </p>
+        )}
       </>
       <button onClick={handleSubmit}>Criar Produto</button>
     </main>
