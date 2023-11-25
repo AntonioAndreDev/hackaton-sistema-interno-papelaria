@@ -27,6 +27,9 @@ export default function CriarProduto() {
         <Title text={"Insira a quantidade em estoque do produto *"} />
         <InputNumber text={"Estoque do Produto"} />
       </>
+
+      <Title text={"Insira o link da imagem do produto *"} />
+      <InputText text={"URL da imagem"} />
     </main>
   );
 }
