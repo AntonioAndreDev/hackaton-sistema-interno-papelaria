@@ -65,6 +65,17 @@ export default function SignUp() {
     }
 
     console.log({ nome, sobrenome, senha });
+    const email = `${nome.toLowerCase()}.${sobrenome.toLowerCase()}@papersaad.gov.br`;
+    const newAccount = {
+      nome,
+      sobrenome,
+      senha,
+      email,
+    };
+
+    const accounts = JSON.parse(localStorage.getItem("contas")) || [];
+    accounts.push(newAccount);
+    localStorage.setItem("contas", JSON.stringify(accounts));
   };
 
   return (
