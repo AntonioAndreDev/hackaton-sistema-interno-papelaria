@@ -20,25 +20,8 @@ const MenuProps = {
 
 const tipos = ["Artigos de Papelaria", "Material Escolar", "Material Técnico"];
 
-function getStyles(tipo, tipoDeProduto, theme) {
-  return {
-    fontWeight:
-      tipoDeProduto.indexOf(tipo) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-
-export default function SelectTipoDeProduto() {
+export default function SelectTipoDeProduto({ onChange, value }) {
   const theme = useTheme();
-  const [tipoDeProduto, setTipoDeProduto] = useState([]);
-
-  const handleChange = (event) => {
-    const value = event.target.value;
-    setTipoDeProduto(typeof value === "string" ? value.split(",") : value);
-  };
-
-  console.log(tipoDeProduto);
 
   return (
     <div>
@@ -50,17 +33,13 @@ export default function SelectTipoDeProduto() {
           required
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
-          value={tipoDeProduto}
-          onChange={handleChange}
+          value={value}
+          onChange={onChange}
           input={<OutlinedInput label="Tipo de Produto *" />}
           MenuProps={MenuProps}
         >
           {tipos.map((tipo) => (
-            <MenuItem
-              key={tipo}
-              value={tipo}
-              style={getStyles(tipo, tipoDeProduto, theme)}
-            >
+            <MenuItem key={tipo} value={tipo}>
               {tipo}
             </MenuItem>
           ))}

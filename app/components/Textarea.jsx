@@ -3,7 +3,7 @@ import * as React from "react";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 import { styled } from "@mui/system";
 
-export default function Textarea() {
+export default function Textarea({ onChange, value }) {
   const blue = {
     100: "#DAECFF",
     200: "#b6daff",
@@ -56,11 +56,13 @@ export default function Textarea() {
   );
 
   return (
-    <Textarea
-      required
-      aria-label="minimum height"
-      minRows={3}
-      placeholder="Insira a descrição *"
-    />
+    <div>
+      <textarea
+        rows={3}
+        onChange={onChange}
+        value={value}
+        className="w-[300px] text-sm font-normal leading-6 py-2 px-3 rounded-lg text-black bg-[#F5F5F5] border focus:border-blue-600 focus:outline-none hover:border-black"
+      />
+    </div>
   );
 }
