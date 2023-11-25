@@ -1,10 +1,10 @@
 import Link from "next/link";
+import Table from "@/app/components/Table/App";
 
 export default function ListaDeProdutos() {
   return (
     <div>
-      <h1>Lista de produtos</h1>
-      <Link href={"/dashboard"}>Menu Principal</Link>
+      <Table />
     </div>
   );
 }
