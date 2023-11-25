@@ -61,7 +61,7 @@ export default function Textarea({ onChange, value }) {
         rows={3}
         onChange={onChange}
         value={value}
-        className="w-[300px] text-sm font-normal leading-6 py-2 px-3 rounded-lg text-black bg-[#F5F5F5] border focus:border-blue-600 focus:outline-none hover:border-black"
+        className="w-[300px] text-sm font-normal leading-6 py-2 px-3 border-black/30 rounded-lg text-black bg-[#F5F5F5] border focus:border-blue-600 focus:outline-none hover:border-black"
       />
     </div>
   );
