@@ -86,6 +86,20 @@ export default function TableOfProducts() {
     });
   }, [sortDescriptor, items]);
 
+  const deletarProduto = (productId) => {
+    const id = productId;
+    const produtos = JSON.parse(localStorage.getItem("produtos"));
+    const deletarProduto = produtos.filter((produto) => produto.id !== id);
+    const produtoNome = produtos.filter((produto) => produto.id === id);
+    const confirmarDelete = confirm(
+      `Tem certeza que deseja deletar o produto ${produtoNome[0].name}?`
+    );
+    if (confirmarDelete) {
+      localStorage.setItem("produtos", JSON.stringify(deletarProduto));
+      window.location.reload();
+    }
+  };
+
   const renderCell = React.useCallback((user, columnKey) => {
     const cellValue = user[columnKey];
 
@@ -125,7 +139,7 @@ export default function TableOfProducts() {
               <DropdownMenu>
                 <DropdownItem href={`/visualizar-produto/${user.id}`}>Visualizar</DropdownItem>
                 <DropdownItem href={`/editar-produto/${user.id}`}>Editar</DropdownItem>
-                <DropdownItem>Deletar</DropdownItem>
+                <DropdownItem onClick={() => deletarProduto(user.id)}>Deletar</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
