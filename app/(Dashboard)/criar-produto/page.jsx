@@ -5,6 +5,7 @@ import InputText from "@/app/components/InputText";
 import SelectTipoDeProduto from "@/app/components/SelectTipoDeProduto";
 import Textarea from "@/app/components/Textarea";
 import Title from "@/app/components/Title";
+import ButtonComponent from "@/app/components/ButtonComponent";
 
 export default function CriarProduto() {
   const [nomeProduto, setNomeProduto] = useState("");
@@ -134,7 +135,7 @@ export default function CriarProduto() {
           </p>
         )}
       </>
-      <button onClick={handleSubmit}>Criar Produto</button>
+      <ButtonComponent onClick={handleSubmit} text={"Criar Produto"} />
     </main>
   );
 }
