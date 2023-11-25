@@ -12,20 +12,22 @@ const opcoesDeTipo = [
   { name: "material técnico", uid: "material técnico" },
 ];
 
-const produtosJson = JSON.parse(localStorage.getItem("produtos"));
-
 const produtos = [];
-console.log(produtos);
+if (typeof window !== undefined) {
+  const produtosJson = JSON.parse(localStorage.getItem("produtos"));
 
-for (let i = 0; i < produtosJson?.length; i++) {
-  const novoProduto = {
-    id: i + 1,
-    name: produtosJson[i].name,
-    tipoDeProduto: produtosJson[i].tipoDeProduto.toLowerCase(),
-    avatar: produtosJson[i].imagem,
-  };
+  console.log(produtos);
 
-  produtos.push(novoProduto);
+  for (let i = 0; i < produtosJson?.length; i++) {
+    const novoProduto = {
+      id: i + 1,
+      name: produtosJson[i].name,
+      tipoDeProduto: produtosJson[i].tipoDeProduto.toLowerCase(),
+      avatar: produtosJson[i].imagem,
+    };
+
+    produtos.push(novoProduto);
+  }
 }
 
 export { columns, produtos, opcoesDeTipo };
