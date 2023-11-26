@@ -10,26 +10,40 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useEffect, useState } from "react";
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+  const [todasContas, setTodasContas] = useState([]);
+  const [isEmailValido, setIsEmailValido] = useState(false);
+  const [isSenhaValida, setIsSenhaValida] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const contas = JSON.parse(localStorage.getItem("contas")) || [];
+      setTodasContas(contas);
+    }
+  }, []);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const emailDigitado = data.get("email");
+    const senhaDigitada = data.get("password");
+
+    const contaExiste = todasContas.find((conta) => conta.email === emailDigitado);
+
+    if (contaExiste && contaExiste.email === emailDigitado && contaExiste.senha === senhaDigitada) {
+      window.location.href = "/dashboard";
+    } else {
+      alert("Credenciais inválidas!");
+    }
   };
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container
-        className="h-screen flex justify-center"
-        component="main"
-        maxWidth="xs"
-      >
+      <Container className="h-screen flex justify-center" component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -45,12 +59,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5" className="text-center">
             Login
           </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -82,18 +91,12 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link
-                  href="#"
-                  className="text-blue-400 text-sm border-b border-blue-400"
-                >
+                <Link href="#" className="text-blue-400 text-sm border-b border-blue-400">
                   Esqueceu a senha?
                 </Link>
               </Grid>
               <Grid item>
-                <Link
-                  href={"/sign-up"}
-                  className="text-blue-400 text-sm border-b border-blue-400"
-                >
+                <Link href={"/sign-up"} className="text-blue-400 text-sm border-b border-blue-400">
                   {"Não tem um conta? Cadastre-se"}
                 </Link>
               </Grid>
