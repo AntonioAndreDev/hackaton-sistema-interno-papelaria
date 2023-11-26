@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { useEffect, useState } from "react";
 import InputNumber from "@/app/components/InputNumber";
 import InputText from "@/app/components/InputText";
@@ -8,6 +9,15 @@ import Title from "@/app/components/Title";
 import ButtonComponent from "@/app/components/ButtonComponent";
 import { v4 as uuidv4 } from "uuid";
 import { Toaster, toast } from "sonner";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+} from "@nextui-org/react";
 
 export default function CriarProduto() {
   const [nomeProduto, setNomeProduto] = useState("");
@@ -17,6 +27,8 @@ export default function CriarProduto() {
   const [imagemProduto, setImagemProduto] = useState("");
   const [valorProduto, setValorProduto] = useState("");
   const [camposValidos, setCamposValidos] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [backdrop, setBackdrop] = React.useState("opaque");
 
   function validarCampos() {
     if (
@@ -37,49 +49,45 @@ export default function CriarProduto() {
     validarCampos();
   }, [nomeProduto, tipoProduto, descricaoProduto, estoqueProduto, imagemProduto, valorProduto]);
 
+  const handleOpen = (backdrop) => {
+    setBackdrop(backdrop);
+    onOpen();
+  };
+
+  const handleConfirmModal = () => {
+    const produtos = JSON.parse(localStorage.getItem("produtos")) || [];
+    const produtoExistente = produtos.find((item) => item.name === nomeProduto);
+    if (produtoExistente) {
+      toast.warning("Produto já existe!");
+      return;
+    }
+    const produto = {
+      id: uuidv4(),
+      name: nomeProduto,
+      tipoDeProduto: tipoProduto,
+      descricao: descricaoProduto,
+      estoque: estoqueProduto,
+      imagem: imagemProduto,
+      valor: valorProduto,
+    };
+    produtos.push(produto);
+    localStorage.setItem("produtos", JSON.stringify(produtos));
+    toast.success("Produto criado com sucesso!");
+    setNomeProduto("");
+    setTipoProduto("");
+    setDescricaoProduto("");
+    setEstoqueProduto("");
+    setImagemProduto("");
+    setValorProduto("");
+  };
+
+  const handleCancelModal = () => {
+    toast.warning("Produto não criado!");
+  };
+
   const handleSubmit = () => {
     if (camposValidos) {
-      const confirmarCriacao = window.confirm(
-        `Deseja criar o seguinte produto? 
-        Nome: ${nomeProduto} 
-        Tipo: ${tipoProduto} 
-        Descrição: ${descricaoProduto} 
-        Estoque: ${estoqueProduto} 
-        Imagem: ${imagemProduto} 
-        Valor: ${valorProduto}`
-      );
-      if (confirmarCriacao) {
-        const produtos = JSON.parse(localStorage.getItem("produtos")) || [];
-        const produtoExistente = produtos.find((item) => item.name === nomeProduto);
-
-        if (produtoExistente) {
-          toast.warning("Produto já existe!");
-          return;
-        }
-
-        const produto = {
-          id: uuidv4(),
-          name: nomeProduto,
-          tipoDeProduto: tipoProduto,
-          descricao: descricaoProduto,
-          estoque: estoqueProduto,
-          imagem: imagemProduto,
-          valor: valorProduto,
-        };
-
-        produtos.push(produto);
-        localStorage.setItem("produtos", JSON.stringify(produtos));
-        toast.success("Produto criado com sucesso!");
-
-        setNomeProduto("");
-        setTipoProduto("");
-        setDescricaoProduto("");
-        setEstoqueProduto("");
-        setImagemProduto("");
-        setValorProduto("");
-      } else {
-        toast.warning("Produto não criado!");
-      }
+      handleOpen("blur");
     } else {
       toast.warning("Preencha todos os campos!");
     }
@@ -171,6 +179,55 @@ export default function CriarProduto() {
         )}
       </>
       <ButtonComponent onClick={handleSubmit} text={"Criar Produto"} />
+      <Modal backdrop={backdrop} isOpen={isOpen} onClose={onClose}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                Deseja criar o produto abaixo?
+              </ModalHeader>
+              <ModalBody>
+                <p>
+                  <strong>Nome: </strong>
+                  {nomeProduto}
+                </p>
+                <p>
+                  <strong>Tipo: </strong>
+                  {tipoProduto}
+                </p>
+                <p>
+                  <strong>Descrição: </strong>
+                  {descricaoProduto}
+                </p>
+                <p>
+                  <strong>Estoque: </strong> ${estoqueProduto}
+                </p>
+                <p>
+                  <strong>Imagem: </strong>
+                  {imagemProduto}
+                </p>
+                <p>
+                  <strong>Valor: </strong>
+                  {valorProduto}
+                </p>
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  onClick={handleCancelModal}
+                  color="danger"
+                  variant="light"
+                  onPress={onClose}
+                >
+                  Cancelar
+                </Button>
+                <Button onClick={handleConfirmModal} color="primary" onPress={onClose}>
+                  Confirmar
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
       <Toaster position="top-center" />
     </main>
   );
