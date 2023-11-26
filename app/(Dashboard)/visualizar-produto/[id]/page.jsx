@@ -25,7 +25,7 @@ export default function VisualizarProduto({ params }) {
   console.log(produto);
 
   return (
-    <main className="mt-12 mx-auto flex flex-col">
+    <main className="mt-12 items-center w-full flex flex-col">
       <h1 className="text-center text-xl mb-4">
         {carregando ? (
           <Skeleton className="w-[400px] rounded-lg">
