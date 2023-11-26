@@ -3,13 +3,13 @@
 
 ##
 
-### Sobre a Aplicação
+### ⚙️ Sobre a Aplicação
 
 <p>Esse projeto foi desenvolvido com o objetivo principal de atender as necessidades internas de organizações relacionadas com o nicho de papelaria, voltada para questões de gerenciamento de produtos.</p>
 
 ##
 
-### Tecnologias utilizadas:
+### 🖥️ Tecnologias utilizadas:
 * [Javascript](https://developer.mozilla.org/pt-BR/docs/web/javascript/guide/introduction): linguagem de programação
 * [React](https://react.dev/): biblioteca Javascript
 * [Nextjs](https://nextjs.org/): Framework React
@@ -17,7 +17,7 @@
 
 ##
 
-### Features
+### 💡 Features
 
 * **Criar Conta:** crie um conta antes de acessar a aplicação.
 * **Fazer Login:** após criar a sua conta, faça login.
@@ -26,7 +26,7 @@
 
 ##
 
-### Como executar:
+### 🟡 Como executar:
 
 ### 1. Instale `Node` na sua máquina. Para isso acesse [esse link](https://nodejs.org/en/download)
 
@@ -46,7 +46,7 @@
 
 ##
 
-### Registro (Cadastre-se)
+### 🔒 Registro (Cadastre-se)
 ### Para poder ter acesso à aplicação é necessário criar uma conta:
 * **Inclua o nome e sobrenome:** esses campos devem possuir 3 ou mais palavras únicas. Exemplo de uso correto: `nome`: Antonio `sobrenome`: Andre
   Exemplo de uso incorreto: `nome`: Antonio Andre `sobrenome`: Sena Brilhante
@@ -54,7 +54,7 @@
 
 ##
 
-### Entrada (Login)
+### 🔓 Entrada (Login)
 Ao criar uma conta, seu email será o seguinte: `nome`.`sobrenome`@papersaad.gov.br
 Portanto, para seu login insira:
 * **Email:** `nome`.`sobrenome`@papersaad.gov.br
@@ -62,7 +62,7 @@ Portanto, para seu login insira:
 
 ##
 
-### Criando um produto
+### 📦 Criando um produto
 Para criar um novo produto basta acessar `Criar Produto` no menu lateral.
 * **Nome do produto:** string
 * **Tipo de produto:** string
@@ -85,7 +85,7 @@ Pacote com 10 unidades Branca
 
 ##
 
-### Visualizando os produtos
+### 📦 Visualizando os produtos
 Para ver a lista de todos os produtos acesse `Ver Produtos` no menu lateral. <br/>
 **Caso não veja nenhum produto, mesmo que tenha criado um, clique em** `Atualizar Lista de Produtos`.
 Feito isso, será possível ver todos os produtos cadastrados. Além disso, há opções de filtragem da tabela que contem a lista de produtos:
@@ -100,7 +100,7 @@ Feito isso, será possível ver todos os produtos cadastrados. Além disso, há 
 
 ##
 
-### Ações
+### 📃 Ações
 Em `Ver Produtos` existe uma opção chamada `ações`, a partir dessa coluna existem algumas opções:
 * **Visualizar:** visualize todas as informações do produto específico que foi acessado
 * **Editar:** edite os dados do produto específico que foi selecionado
