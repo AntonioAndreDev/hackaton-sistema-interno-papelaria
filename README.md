@@ -1,7 +1,5 @@
 
-### 💻 Sistema de Gerenciamento Interno de Produtos Para Papelarias
-
-##
+## 💻 Sistema de Gerenciamento Interno de Produtos Para Papelarias
 
 ### ⚙️ Sobre a Aplicação
 
