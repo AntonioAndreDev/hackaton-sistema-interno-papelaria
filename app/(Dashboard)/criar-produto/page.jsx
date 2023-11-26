@@ -63,6 +63,13 @@ export default function CriarProduto() {
 
         produtos.push(produto);
         localStorage.setItem("produtos", JSON.stringify(produtos));
+
+        setNomeProduto("");
+        setTipoProduto("");
+        setDescricaoProduto("");
+        setEstoqueProduto("");
+        setImagemProduto("");
+        setValorProduto("");
       } else {
         alert("Produto não criado!");
       }
