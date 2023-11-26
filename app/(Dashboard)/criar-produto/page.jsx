@@ -39,10 +39,15 @@ export default function CriarProduto() {
 
   const handleSubmit = () => {
     if (camposValidos) {
-      const confirmarCriacao = confirm(
-        `Deseja criar o seguinte produto? \n Nome: ${nomeProduto} \n Tipo: ${tipoProduto} \n Descrição: ${descricaoProduto} \n Estoque: ${estoqueProduto} \n Imagem: ${imagemProduto} \n Valor: ${valorProduto}`
+      const confirmarCriacao = window.confirm(
+        `Deseja criar o seguinte produto? 
+        Nome: ${nomeProduto} 
+        Tipo: ${tipoProduto} 
+        Descrição: ${descricaoProduto} 
+        Estoque: ${estoqueProduto} 
+        Imagem: ${imagemProduto} 
+        Valor: ${valorProduto}`
       );
-
       if (confirmarCriacao) {
         const produtos = JSON.parse(localStorage.getItem("produtos")) || [];
         const produtoExistente = produtos.find((item) => item.name === nomeProduto);
