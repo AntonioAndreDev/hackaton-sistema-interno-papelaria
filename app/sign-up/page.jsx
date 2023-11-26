@@ -10,6 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Toaster, toast } from "sonner";
 
 function Copyright(props) {
   return (
@@ -50,17 +51,17 @@ export default function SignUp() {
     const senha = data.get("password");
 
     if (!validacao.validateName(nome)) {
-      alert("Nome inválido");
+      toast.warning("Nome inválido");
       return;
     }
 
     if (!validacao.validateLastName(sobrenome)) {
-      alert("Sobrenome inválido");
+      toast.warning("Sobrenome inválido");
       return;
     }
 
     if (!validacao.validatePassword(senha)) {
-      alert("Senha fraca");
+      toast.warning("Senha fraca");
       return;
     }
 
@@ -76,6 +77,7 @@ export default function SignUp() {
     const accounts = JSON.parse(localStorage.getItem("contas")) || [];
     accounts.push(newAccount);
     localStorage.setItem("contas", JSON.stringify(accounts));
+    toast.success("Conta criada com sucesso!");
   };
 
   return (
@@ -160,6 +162,7 @@ export default function SignUp() {
           </Box>
         </Box>
       </Container>
+      <Toaster position="top-center" />{" "}
     </ThemeProvider>
   );
 }

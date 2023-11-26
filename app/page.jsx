@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useEffect, useState } from "react";
+import { Toaster, toast } from "sonner";
 
 const defaultTheme = createTheme();
 
@@ -39,7 +40,7 @@ export default function SignIn() {
 
       window.location.href = "/dashboard";
     } else {
-      alert("Credenciais inválidas!");
+      toast.warning("Credenciais inválidas!");
     }
   };
 
@@ -106,6 +107,7 @@ export default function SignIn() {
           </Box>
         </Box>
       </Container>
+      <Toaster position="top-center" />
     </ThemeProvider>
   );
 }
