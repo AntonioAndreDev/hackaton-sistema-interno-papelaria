@@ -39,9 +39,11 @@ export default function SignIn() {
       setCarregando(true);
       if (typeof window !== "undefined") {
         localStorage.setItem("username", contaExiste.nome);
+        window.addEventListener("load", () => {
+          setCarregando(false);
+        });
       }
       window.location.href = "/dashboard";
-      setCarregando(false);
     } else {
       toast.warning("Credenciais inválidas!");
     }
