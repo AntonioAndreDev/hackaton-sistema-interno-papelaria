@@ -37,5 +37,11 @@
 * Digite `git clone <URL do repositório copiada>` e pressione `enter`
 * Abra o projeto clonado no seu editor de código fonte, eu recomendo o [Visual Studio Code](https://code.visualstudio.com/Download)
 
-### 3. Entre
+### 3. Instale as bibliotecas pelo terminal, dentro da pasta que foi criada:
+* Execute o comando `npm install` para instalar todas as bibliotecas que foram utilizadas no projeto.
+
+### 4. Inicie a aplicação no seu navegador por meio do terminal:
+* Execute o comando `npm run dev` para inicializar a aplicação.
+* Se não houver nenhum projeto sendo executado em desenvolvimento na sua máquina, a aplicação abrirá no endereço `http://localhost:3000/`, caso contrário, no terminal vai ser mostrado em qual endereço a aplicação está sendo executada.
+
 
