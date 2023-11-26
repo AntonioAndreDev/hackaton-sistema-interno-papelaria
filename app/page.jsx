@@ -41,6 +41,7 @@ export default function SignIn() {
         localStorage.setItem("username", contaExiste.nome);
       }
       window.location.href = "/dashboard";
+      setCarregando(false);
     } else {
       toast.warning("Credenciais inválidas!");
     }
