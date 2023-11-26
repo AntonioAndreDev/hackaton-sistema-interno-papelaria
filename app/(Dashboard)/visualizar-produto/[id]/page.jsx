@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Card, CardHeader, CardBody, CardFooter, Divider, Link, Image } from "@nextui-org/react";
+import Copy from "@/app/components/Copy";
 
 export default function VisualizarProduto({ params }) {
   const [produto, setProduto] = useState("");
@@ -42,6 +43,9 @@ export default function VisualizarProduto({ params }) {
           <p>R${produto.valor}</p>
         </CardBody>
         <Divider />
+        <CardFooter>
+          <Copy textToCopy={produto.id} />
+        </CardFooter>
       </Card>
     </main>
   );
