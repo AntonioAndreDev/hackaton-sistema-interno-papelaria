@@ -12,11 +12,13 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import { Toaster, toast } from "sonner";
+import SpinnerComponent from "./components/SpinnerComponent";
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
   const [todasContas, setTodasContas] = useState([]);
+  const [carregando, setCarregando] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -34,10 +36,10 @@ export default function SignIn() {
     const contaExiste = todasContas.find((conta) => conta.email === emailDigitado);
 
     if (contaExiste && contaExiste.email === emailDigitado && contaExiste.senha === senhaDigitada) {
+      setCarregando(true);
       if (typeof window !== "undefined") {
         localStorage.setItem("username", contaExiste.nome);
       }
-
       window.location.href = "/dashboard";
     } else {
       toast.warning("Credenciais inválidas!");
@@ -46,6 +48,11 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+      {carregando && (
+        <div className="h-screen flex justify-center items-center">
+          <SpinnerComponent />
+        </div>
+      )}
       <Container className="h-screen flex justify-center" component="main" maxWidth="xs">
         <CssBaseline />
         <Box
