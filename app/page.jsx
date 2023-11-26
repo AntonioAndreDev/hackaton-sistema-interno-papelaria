@@ -16,8 +16,6 @@ const defaultTheme = createTheme();
 
 export default function SignIn() {
   const [todasContas, setTodasContas] = useState([]);
-  const [isEmailValido, setIsEmailValido] = useState(false);
-  const [isSenhaValida, setIsSenhaValida] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -35,6 +33,10 @@ export default function SignIn() {
     const contaExiste = todasContas.find((conta) => conta.email === emailDigitado);
 
     if (contaExiste && contaExiste.email === emailDigitado && contaExiste.senha === senhaDigitada) {
+      if (typeof window !== "undefined") {
+        localStorage.setItem("username", contaExiste.nome);
+      }
+
       window.location.href = "/dashboard";
     } else {
       alert("Credenciais inválidas!");

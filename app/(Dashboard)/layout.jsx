@@ -79,9 +79,18 @@ const defaultTheme = createTheme();
 
 export default function RootLayout({ children }) {
   const [open, setOpen] = React.useState(true);
+  const [username, setUsername] = React.useState("");
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedUsername = localStorage.getItem("username");
+      setUsername(storedUsername);
+    }
+  }, []);
+
   return (
     <html lang="en">
       <body className={poppins.className}>
@@ -116,7 +125,7 @@ export default function RootLayout({ children }) {
                   >
                     Dashboard
                   </Typography>
-                  <h1>{`Seja bem vindo, { nome }`}</h1>
+                  <h1>{`Seja bem vindo(a), ${username}!`}</h1>
                 </Toolbar>
               </AppBar>
               <Drawer variant="permanent" open={open}>
