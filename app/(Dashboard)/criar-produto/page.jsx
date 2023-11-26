@@ -7,6 +7,7 @@ import Textarea from "@/app/components/Textarea";
 import Title from "@/app/components/Title";
 import ButtonComponent from "@/app/components/ButtonComponent";
 import { v4 as uuidv4 } from "uuid";
+import { Toaster, toast } from "sonner";
 
 export default function CriarProduto() {
   const [nomeProduto, setNomeProduto] = useState("");
@@ -47,7 +48,7 @@ export default function CriarProduto() {
         const produtoExistente = produtos.find((item) => item.name === nomeProduto);
 
         if (produtoExistente) {
-          alert("Produto já existe!");
+          toast.warning("Produto já existe!");
           return;
         }
 
@@ -63,6 +64,7 @@ export default function CriarProduto() {
 
         produtos.push(produto);
         localStorage.setItem("produtos", JSON.stringify(produtos));
+        toast.success("Produto criado com sucesso!");
 
         setNomeProduto("");
         setTipoProduto("");
@@ -71,10 +73,10 @@ export default function CriarProduto() {
         setImagemProduto("");
         setValorProduto("");
       } else {
-        alert("Produto não criado!");
+        toast.warning("Produto não criado!");
       }
     } else {
-      alert("Preencha todos os campos!");
+      toast.warning("Preencha todos os campos!");
     }
   };
 
@@ -164,6 +166,7 @@ export default function CriarProduto() {
         )}
       </>
       <ButtonComponent onClick={handleSubmit} text={"Criar Produto"} />
+      <Toaster position="top-center" />
     </main>
   );
 }
