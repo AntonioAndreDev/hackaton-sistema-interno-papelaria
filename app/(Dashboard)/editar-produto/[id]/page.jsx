@@ -79,6 +79,7 @@ export default function EditarProduto({ params }) {
     produtos[produtoIndex] = updatedProduto;
     localStorage.setItem("produtos", JSON.stringify(produtos));
     setProduto(updatedProduto);
+    toast.success("Produto editado com sucesso!");
   };
 
   const handleSubmit = () => {
