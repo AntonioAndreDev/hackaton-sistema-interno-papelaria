@@ -206,15 +206,19 @@ export default function CriarProduto() {
                   {descricaoProduto}
                 </p>
                 <p>
-                  <strong>Estoque: </strong> ${estoqueProduto}
+                  <strong>Estoque: </strong> {estoqueProduto}
                 </p>
                 <p>
                   <strong>Imagem: </strong>
-                  {imagemProduto}
+                  <img
+                    className="w-1/4 rounded-md"
+                    src={imagemProduto}
+                    alt={`Imagem de ${nomeProduto}`}
+                  />
                 </p>
                 <p>
                   <strong>Valor: </strong>
-                  {valorProduto}
+                  R${valorProduto}
                 </p>
               </ModalBody>
               <ModalFooter>

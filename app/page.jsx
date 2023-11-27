@@ -103,11 +103,6 @@ export default function SignIn() {
               Entrar
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" className="text-blue-400 text-sm border-b border-blue-400">
-                  Esqueceu a senha?
-                </Link>
-              </Grid>
               <Grid item>
                 <Link href={"/sign-up"} className="text-blue-400 text-sm border-b border-blue-400">
                   {"Não tem um conta? Cadastre-se"}
