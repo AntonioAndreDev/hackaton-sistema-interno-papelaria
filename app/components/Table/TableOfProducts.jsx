@@ -58,16 +58,16 @@ export default function TableOfProducts() {
     let produtosFiltrados = [...produtos];
 
     if (hasSearchFilter) {
-      produtosFiltrados = produtosFiltrados.filter((user) =>
-        user.name.toLowerCase().includes(filterValue.toLowerCase())
+      produtosFiltrados = produtosFiltrados.filter((product) =>
+        product.name.toLowerCase().includes(filterValue.toLowerCase())
       );
     }
     if (
       tipoDeProdutoFilter !== "all" &&
       Array.from(tipoDeProdutoFilter).length !== opcoesDeTipo.length
     ) {
-      produtosFiltrados = produtosFiltrados.filter((user) =>
-        Array.from(tipoDeProdutoFilter).includes(user.tipoDeProduto)
+      produtosFiltrados = produtosFiltrados.filter((product) =>
+        Array.from(tipoDeProdutoFilter).includes(product.tipoDeProduto)
       );
     }
 
@@ -119,25 +119,25 @@ export default function TableOfProducts() {
     handleOpen("blur");
   };
 
-  const renderCell = React.useCallback((user, columnKey) => {
-    const cellValue = user[columnKey];
+  const renderCell = React.useCallback((product, columnKey) => {
+    const cellValue = product[columnKey];
 
     switch (columnKey) {
       case "name":
         return (
           <User
-            avatarProps={{ radius: "lg", src: user.avatar }}
-            description={user.email}
+            avatarProps={{ radius: "lg", src: product.avatar }}
+            description={product.email}
             name={cellValue}
           >
-            {user.email}
+            {product.email}
           </User>
         );
       case "role":
         return (
           <div className="flex flex-col">
             <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">{user.team}</p>
+            <p className="text-bold text-tiny capitalize text-default-400">{product.team}</p>
           </div>
         );
       case "tipoDeProduto":
@@ -156,9 +156,9 @@ export default function TableOfProducts() {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu>
-                <DropdownItem href={`/visualizar-produto/${user.id}`}>Visualizar</DropdownItem>
-                <DropdownItem href={`/editar-produto/${user.id}`}>Editar</DropdownItem>
-                <DropdownItem onClick={() => handleClickDelete(user.id)}>Deletar</DropdownItem>
+                <DropdownItem href={`/visualizar-produto/${product.id}`}>Visualizar</DropdownItem>
+                <DropdownItem href={`/editar-produto/${product.id}`}>Editar</DropdownItem>
+                <DropdownItem onClick={() => handleClickDelete(product.id)}>Deletar</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
