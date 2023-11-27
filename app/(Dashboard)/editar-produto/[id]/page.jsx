@@ -1,6 +1,7 @@
 "use client";
 
 import ButtonComponent from "@/app/components/ButtonComponent";
+import Copy from "@/app/components/Copy";
 import InputNumber from "@/app/components/InputNumber";
 import InputText from "@/app/components/InputText";
 import SelectTipoDeProduto from "@/app/components/SelectTipoDeProduto";
@@ -8,11 +9,18 @@ import Textarea from "@/app/components/Textarea";
 import Title from "@/app/components/Title";
 import {
   Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Divider,
+  Image,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Skeleton,
   useDisclosure,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
@@ -29,11 +37,13 @@ export default function EditarProduto({ params }) {
   const [produto, setProduto] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [backdrop, setBackdrop] = useState("opaque");
+  const [carregando, setCarregando] = useState(true);
 
   useEffect(() => {
     const produtos = JSON.parse(localStorage.getItem("produtos"));
     const produto = produtos.find((produto) => produto.id === params.id);
     setProduto(produto);
+    setCarregando(false);
   }, []);
 
   function validarCampos() {
@@ -67,6 +77,7 @@ export default function EditarProduto({ params }) {
   const handleConfirmModal = () => {
     const produtos = JSON.parse(localStorage.getItem("produtos"));
     const produtoIndex = produtos.findIndex((p) => p.id === params.id);
+
     const updatedProduto = {
       ...produto,
       name: nomeProduto || produto.name,
@@ -92,25 +103,99 @@ export default function EditarProduto({ params }) {
 
   return (
     <div>
-      <a href="/lista-de-produtos">Voltar</a>
-      <div className="border border-black/50 rounded-md p-4 mb-8">
-        <h1 className="text-3xl mb-2">Editar produto</h1>
-        <img src={produto.imagem} className="w-1/6" alt="" />
-        <div className="flex gap-1">
-          <strong>Nome:</strong> <h5>{produto.name}</h5> <br />
-        </div>
-        <div className="flex gap-1">
-          <strong>Tipo:</strong> <h5>{produto.tipoDeProduto}</h5> <br />
-        </div>
-        <div className="flex gap-1">
-          <strong>Descrição:</strong> <h5>{produto.descricao}</h5> <br />
-        </div>
-        <div className="flex gap-1">
-          <strong>Estoque:</strong> <h5>{produto.estoque}</h5> <br />
-        </div>
-        <div className="flex gap-1">
-          <strong>Valor:</strong> <h5>{produto.valor}</h5> <br />
-        </div>
+      <div>
+        <h1 className="text-xl mb-4">
+          {carregando ? (
+            <Skeleton className="w-[400px] rounded-lg">
+              <div className="h-3 w-[400px] rounded-lg bg-default-200"></div>
+            </Skeleton>
+          ) : (
+            `Detalhes do Produto: ${produto.name}`
+          )}
+        </h1>
+        <Card className="max-w-[400px]">
+          <CardHeader className="flex gap-3">
+            {carregando && (
+              <Skeleton className="w-16 h-16 rounded-lg">
+                <div className="h-16 w-16 rounded-lg bg-default-200"></div>
+              </Skeleton>
+            )}
+            <Image
+              className="w-16"
+              alt="nextui logo"
+              height={200}
+              width={200}
+              radius="sm"
+              src={produto.imagem}
+            />
+            <div className="flex flex-col">
+              {carregando ? (
+                <div className="flex flex-col gap-2">
+                  <Skeleton className="h-3 w-[200px] rounded-lg">
+                    <div className="h-3 w-[200px] rounded-lg bg-default-200"></div>
+                  </Skeleton>
+                  <Skeleton className="h-3 w-[200px] rounded-lg">
+                    <div className="h-3 w-[200px] rounded-lg bg-default-200"></div>
+                  </Skeleton>
+                </div>
+              ) : (
+                <>
+                  <p className="text-md font-medium">{produto.name}</p>
+                  <p className="text-small text-default-500">{produto.tipoDeProduto}</p>
+                </>
+              )}
+            </div>
+          </CardHeader>
+          <Divider />
+          <CardBody>
+            {carregando ? (
+              <div className="flex flex-col gap-2">
+                <Skeleton className="w-[350px] rounded-lg">
+                  <div className="h-3 w-[350px] rounded-lg bg-default-200"></div>
+                </Skeleton>
+                <Skeleton className="w-[350px] rounded-lg">
+                  <div className="h-3 w-[350px] rounded-lg bg-default-200"></div>
+                </Skeleton>
+              </div>
+            ) : (
+              `${produto.descricao}`
+            )}
+          </CardBody>
+          <CardBody>
+            {carregando ? (
+              <div className="flex flex-col gap-2">
+                <Skeleton className="w-[180px] rounded-lg">
+                  <div className="h-3 w-[180px] rounded-lg bg-default-200"></div>
+                </Skeleton>
+              </div>
+            ) : (
+              `${produto.estoque} unidades em estoque.`
+            )}
+          </CardBody>
+          <CardBody>
+            {carregando ? (
+              <div className="flex flex-col gap-2">
+                <Skeleton className="w-[130px] rounded-lg">
+                  <div className="h-3 w-[130px] rounded-lg bg-default-200"></div>
+                </Skeleton>
+              </div>
+            ) : (
+              `R$${produto.valor}`
+            )}
+          </CardBody>
+          <Divider />
+          <CardFooter>
+            {carregando ? (
+              <div className="flex flex-col gap-2 mx-auto">
+                <Skeleton className="w-[380px] rounded-lg">
+                  <div className="h-3 w-[380px] rounded-lg bg-default-200"></div>
+                </Skeleton>
+              </div>
+            ) : (
+              <Copy textToCopy={produto.id} />
+            )}
+          </CardFooter>
+        </Card>
       </div>
 
       <main>
