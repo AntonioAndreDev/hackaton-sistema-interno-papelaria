@@ -16,6 +16,12 @@ import {
   Chip,
   User,
   Pagination,
+  useDisclosure,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "@nextui-org/react";
 import { PlusIcon } from "./PlusIcon";
 import { VerticalDotsIcon } from "./VerticalDotsIcon";
@@ -24,6 +30,7 @@ import { ChevronDownIcon } from "./ChevronDownIcon";
 import { columns, produtos, opcoesDeTipo } from "./data.js";
 import { capitalize } from "./utils";
 import Link from "next/link";
+import { toast, Toaster } from "sonner";
 
 const INITIAL_VISIBLE_COLUMNS = ["name", "tipoDeProduto", "actions"];
 
@@ -86,18 +93,30 @@ export default function TableOfProducts() {
     });
   }, [sortDescriptor, items]);
 
-  const deletarProduto = (productId) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [backdrop, setBackdrop] = React.useState("opaque");
+  const [idToDelete, setIdToDelete] = React.useState("");
+
+  const handleOpen = (backdrop) => {
+    setBackdrop(backdrop);
+    onOpen();
+  };
+
+  const handleConfirmModal = (productId) => {
     const id = productId;
     const produtos = JSON.parse(localStorage.getItem("produtos"));
     const deletarProduto = produtos.filter((produto) => produto.id !== id);
-    const produtoNome = produtos.filter((produto) => produto.id === id);
-    const confirmarDelete = confirm(
-      `Tem certeza que deseja deletar o produto ${produtoNome[0].name}?`
-    );
-    if (confirmarDelete) {
-      localStorage.setItem("produtos", JSON.stringify(deletarProduto));
-      window.location.reload();
-    }
+    localStorage.setItem("produtos", JSON.stringify(deletarProduto));
+    window.location.reload();
+  };
+
+  const handleCancelModal = () => {
+    toast.warning("Produto não deletado!");
+  };
+
+  const handleClickDelete = (productId) => {
+    setIdToDelete(productId);
+    handleOpen("blur");
   };
 
   const renderCell = React.useCallback((user, columnKey) => {
@@ -139,7 +158,7 @@ export default function TableOfProducts() {
               <DropdownMenu>
                 <DropdownItem href={`/visualizar-produto/${user.id}`}>Visualizar</DropdownItem>
                 <DropdownItem href={`/editar-produto/${user.id}`}>Editar</DropdownItem>
-                <DropdownItem onClick={() => deletarProduto(user.id)}>Deletar</DropdownItem>
+                <DropdownItem onClick={() => handleClickDelete(user.id)}>Deletar</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
@@ -337,6 +356,35 @@ export default function TableOfProducts() {
           )}
         </TableBody>
       </Table>
+      <Modal backdrop={backdrop} isOpen={isOpen} onClose={onClose}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                Realmente deseja deletar o produto selecionado?
+              </ModalHeader>
+              <ModalFooter>
+                <Button
+                  onClick={() => handleCancelModal(idToDelete)}
+                  color="danger"
+                  variant="light"
+                  onPress={onClose}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  onClick={() => handleConfirmModal(idToDelete)}
+                  color="primary"
+                  onPress={onClose}
+                >
+                  Confirmar
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+      <Toaster position="top-center" />
     </div>
   );
 }
