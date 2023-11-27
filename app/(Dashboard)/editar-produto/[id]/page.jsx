@@ -6,7 +6,17 @@ import InputText from "@/app/components/InputText";
 import SelectTipoDeProduto from "@/app/components/SelectTipoDeProduto";
 import Textarea from "@/app/components/Textarea";
 import Title from "@/app/components/Title";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
+} from "@nextui-org/react";
 import { useEffect, useState } from "react";
+import { toast, Toaster } from "sonner";
 
 export default function EditarProduto({ params }) {
   const [nomeProduto, setNomeProduto] = useState("");
@@ -17,6 +27,8 @@ export default function EditarProduto({ params }) {
   const [valorProduto, setValorProduto] = useState("");
   const [camposValidos, setCamposValidos] = useState(false);
   const [produto, setProduto] = useState([]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [backdrop, setBackdrop] = useState("opaque");
 
   useEffect(() => {
     const produtos = JSON.parse(localStorage.getItem("produtos"));
@@ -43,36 +55,37 @@ export default function EditarProduto({ params }) {
     validarCampos();
   }, [nomeProduto, tipoProduto, descricaoProduto, estoqueProduto, imagemProduto, valorProduto]);
 
+  const handleOpen = (backdrop) => {
+    setBackdrop(backdrop);
+    onOpen();
+  };
+
+  const handleCancelModal = () => {
+    toast.warning("Produto não editado!");
+  };
+
+  const handleConfirmModal = () => {
+    const produtos = JSON.parse(localStorage.getItem("produtos"));
+    const produtoIndex = produtos.findIndex((p) => p.id === params.id);
+    const updatedProduto = {
+      ...produto,
+      name: nomeProduto || produto.name,
+      tipoDeProduto: tipoProduto || produto.tipoDeProduto,
+      descricao: descricaoProduto || produto.descricao,
+      estoque: estoqueProduto || produto.estoque,
+      imagem: imagemProduto || produto.imagem,
+      valor: valorProduto || produto.valor,
+    };
+    produtos[produtoIndex] = updatedProduto;
+    localStorage.setItem("produtos", JSON.stringify(produtos));
+    setProduto(updatedProduto);
+  };
+
   const handleSubmit = () => {
     if (camposValidos) {
-      const confirmarEdicao = confirm(
-        `Deseja editar o seguinte produto? \n Nome: ${nomeProduto || produto.name} \n Tipo: ${
-          tipoProduto || produto.tipoDeProduto
-        } \n Descrição: ${descricaoProduto || produto.descricao} \n Estoque: ${
-          estoqueProduto || produto.estoque
-        } \n Imagem: ${imagemProduto || produto.imagem} \n Valor: ${valorProduto || produto.valor}`
-      );
-
-      if (confirmarEdicao) {
-        const produtos = JSON.parse(localStorage.getItem("produtos"));
-        const produtoIndex = produtos.findIndex((p) => p.id === params.id);
-        const updatedProduto = {
-          ...produto,
-          name: nomeProduto || produto.name,
-          tipoDeProduto: tipoProduto || produto.tipoDeProduto,
-          descricao: descricaoProduto || produto.descricao,
-          estoque: estoqueProduto || produto.estoque,
-          imagem: imagemProduto || produto.imagem,
-          valor: valorProduto || produto.valor,
-        };
-        produtos[produtoIndex] = updatedProduto;
-        localStorage.setItem("produtos", JSON.stringify(produtos));
-        setProduto(updatedProduto);
-      } else {
-        alert("Produto não editado!");
-      }
+      handleOpen("opaque");
     } else {
-      alert("Edite pelo menos um campo!");
+      toast.warning("Edite pelo um campo!");
     }
   };
 
@@ -159,6 +172,69 @@ export default function EditarProduto({ params }) {
           />
         </>
         <ButtonComponent onClick={handleSubmit} text={"Editar Produto"} />
+        <Modal backdrop={backdrop} isOpen={isOpen} onClose={onClose}>
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader className="flex flex-col gap-1">
+                  Deseja editar o(s) campo(s) abaixo?
+                </ModalHeader>
+                <ModalBody>
+                  {nomeProduto.length > 0 && (
+                    <p>
+                      <strong>Nome: </strong>
+                      {nomeProduto}
+                    </p>
+                  )}
+                  {tipoProduto.length > 0 && (
+                    <p>
+                      <strong>Tipo: </strong>
+                      {tipoProduto}
+                    </p>
+                  )}
+                  {descricaoProduto.length > 0 && (
+                    <p>
+                      <strong>Descrição: </strong>
+                      {descricaoProduto}
+                    </p>
+                  )}
+                  {estoqueProduto.length > 0 && (
+                    <p>
+                      <strong>Estoque: </strong>
+                      {estoqueProduto}
+                    </p>
+                  )}
+                  {imagemProduto.length > 0 && (
+                    <p>
+                      <strong>Imagem: </strong>
+                      {imagemProduto}
+                    </p>
+                  )}
+                  {valorProduto.length > 0 && (
+                    <p>
+                      <strong>Valor: </strong>
+                      {valorProduto}
+                    </p>
+                  )}
+                </ModalBody>
+                <ModalFooter>
+                  <Button
+                    onClick={handleCancelModal}
+                    color="danger"
+                    variant="light"
+                    onPress={onClose}
+                  >
+                    Cancelar
+                  </Button>
+                  <Button onClick={handleConfirmModal} color="primary" onPress={onClose}>
+                    Confirmar
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
+        <Toaster position="top-center" />
       </main>
     </div>
   );
