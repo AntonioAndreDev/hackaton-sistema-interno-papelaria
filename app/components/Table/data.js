@@ -12,6 +12,7 @@ const opcoesDeTipo = [
 ];
 
 const produtos = [];
+const produtosPDF = [];
 
 if (typeof window !== "undefined") {
   const produtosJson = JSON.parse(localStorage.getItem("produtos"));
@@ -22,10 +23,12 @@ if (typeof window !== "undefined") {
       name: produtosJson[i].name,
       tipoDeProduto: produtosJson[i].tipoDeProduto.toLowerCase(),
       avatar: produtosJson[i].imagem,
+      estoque: produtosJson[i].estoque,
     };
 
     produtos.push(novoProduto);
+    produtosPDF.push(novoProduto);
   }
 }
 
-export { columns, produtos, opcoesDeTipo };
+export { columns, produtos, opcoesDeTipo, produtosPDF };

@@ -26,11 +26,13 @@ import { PlusIcon } from "./PlusIcon";
 import { VerticalDotsIcon } from "./VerticalDotsIcon";
 import { SearchIcon } from "./SearchIcon";
 import { ChevronDownIcon } from "./ChevronDownIcon";
-import { columns, produtos, opcoesDeTipo } from "./data.js";
+import { columns, produtos, opcoesDeTipo, produtosPDF } from "./data.js";
 import { capitalize } from "./utils";
 import Link from "next/link";
 import { toast, Toaster } from "sonner";
 import TooltipComponent from "../Tooltip";
+import generatePDF, { Resolution, Margin } from "react-to-pdf";
+import ButtonComponent from "../ButtonComponent";
 
 const INITIAL_VISIBLE_COLUMNS = ["name", "tipoDeProduto", "actions"];
 
@@ -199,6 +201,51 @@ export default function TableOfProducts() {
     setPage(1);
   }, []);
 
+  const options = {
+    // default is `save`
+    method: "save",
+
+    resolution: Resolution.HIGH,
+    page: {
+      // margin is in MM, default is Margin.NONE = 0
+      margin: Margin.MEDIUM,
+      // default is 'A4'
+      format: "letter",
+      // default is 'portrait'
+      orientation: "portrait",
+    },
+  };
+
+  const getTargetElement = () => {
+    const targetElement = document.createElement("div");
+    produtosPDF.forEach((produto) => {
+      const div = document.createElement("div");
+      div.innerHTML = `
+        <div>
+          <h1>${produto.name}</h1>
+          <p>${produto.id}</p>
+          <p><strong>Estoque:</strong> ${produto.estoque} unidades</p>
+        </div>
+      `;
+      targetElement.appendChild(div);
+    });
+    return targetElement;
+  };
+
+  const handleGeneratePDF = async () => {
+    const targetElement = getTargetElement();
+    const iframe = document.createElement("iframe");
+    document.body.appendChild(iframe);
+    const iframeWindow = iframe.contentWindow;
+    const iframeDocument = iframeWindow.document;
+    iframeDocument.open();
+    iframeDocument.write(targetElement.innerHTML);
+    iframeDocument.close();
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    iframeWindow.print();
+    document.body.removeChild(iframe);
+  };
+
   const topContent = React.useMemo(() => {
     return (
       <div className="flex flex-col gap-4">
@@ -321,6 +368,8 @@ export default function TableOfProducts() {
   return (
     <div>
       <TooltipComponent
+        subText={"Clique para carregar produto"}
+        position={"right"}
         text={"Atualizar Lista de Produtos"}
         onClick={() => window.location.reload()}
       />
@@ -387,6 +436,14 @@ export default function TableOfProducts() {
           )}
         </ModalContent>
       </Modal>
+      {produtosPDF.length > 0 && (
+        <TooltipComponent
+          text={"Gerar relatório"}
+          subText={"Clique para gerar relatório"}
+          position={"bottom"}
+          onClick={() => generatePDF(handleGeneratePDF(), options)}
+        />
+      )}
       <Toaster position="top-center" />
     </div>
   );
