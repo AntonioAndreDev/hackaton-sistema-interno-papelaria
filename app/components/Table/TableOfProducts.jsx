@@ -20,7 +20,6 @@ import {
   Modal,
   ModalContent,
   ModalHeader,
-  ModalBody,
   ModalFooter,
 } from "@nextui-org/react";
 import { PlusIcon } from "./PlusIcon";
@@ -31,6 +30,7 @@ import { columns, produtos, opcoesDeTipo } from "./data.js";
 import { capitalize } from "./utils";
 import Link from "next/link";
 import { toast, Toaster } from "sonner";
+import TooltipComponent from "../Tooltip";
 
 const INITIAL_VISIBLE_COLUMNS = ["name", "tipoDeProduto", "actions"];
 
@@ -320,7 +320,10 @@ export default function TableOfProducts() {
 
   return (
     <div>
-      <button onClick={() => window.location.reload()}>Atualizar Lista de Produtos</button>
+      <TooltipComponent
+        text={"Atualizar Lista de Produtos"}
+        onClick={() => window.location.reload()}
+      />
       <Table
         aria-label="Example table with custom cells, pagination and sorting"
         isHeaderSticky
