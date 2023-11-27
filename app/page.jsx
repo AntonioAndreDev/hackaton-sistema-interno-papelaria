@@ -40,7 +40,7 @@ export default function SignIn() {
       if (typeof window !== "undefined") {
         localStorage.setItem("username", contaExiste.nome);
       }
-      window.location.href = "/dashboard";
+      window.location.href = "/criar-produto";
       window.addEventListener("load", () => {
         setCarregando(false);
       });

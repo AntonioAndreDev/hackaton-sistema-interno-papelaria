@@ -9,14 +9,14 @@ import Link from "next/link";
 
 export const mainListItems = (
   <React.Fragment>
-    <Link href={"/dashboard"}>
+    {/* <Link href={"/dashboard"}>
       <ListItemButton>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="Menu Principal" />
       </ListItemButton>
-    </Link>
+    </Link> */}
 
     <Link href={"/criar-produto"}>
       <ListItemButton>
@@ -30,7 +30,7 @@ export const mainListItems = (
     <Link href={"/lista-de-produtos"}>
       <ListItemButton>
         <ListItemIcon>
-          <PeopleIcon />
+          <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="Ver Produtos" />
       </ListItemButton>
