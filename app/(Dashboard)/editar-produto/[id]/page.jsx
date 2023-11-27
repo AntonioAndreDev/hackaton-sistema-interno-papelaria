@@ -199,64 +199,70 @@ export default function EditarProduto({ params }) {
       </div>
 
       <main>
-        <>
-          <Title text={"Insira o nome do produto"} />
-          <InputText
-            required={false}
-            onChange={(ev) => setNomeProduto(ev.target.value)}
-            value={nomeProduto}
-            autoFocus={true}
-            text={"Nome do Produto"}
-          />
-        </>
+        <div className="grid grid-cols-2">
+          <div>
+            <>
+              <Title text={"Insira o nome do produto"} />
+              <InputText
+                required={false}
+                onChange={(ev) => setNomeProduto(ev.target.value)}
+                value={nomeProduto}
+                autoFocus={true}
+                text={"Nome do Produto"}
+              />
+            </>
 
-        <>
-          <Title text={"Selecione o tipo do produto"} />
-          <SelectTipoDeProduto
-            required={false}
-            onChange={(ev) => setTipoProduto(ev.target.value)}
-            value={tipoProduto}
-          />
-        </>
+            <>
+              <Title text={"Selecione o tipo do produto"} />
+              <SelectTipoDeProduto
+                required={false}
+                onChange={(ev) => setTipoProduto(ev.target.value)}
+                value={tipoProduto}
+              />
+            </>
 
-        <>
-          <Title text={"Insira a descrição do produto"} />
-          <Textarea
-            placeholder={"Descrição do produto"}
-            onChange={(ev) => setDescricaoProduto(ev.target.value)}
-            value={descricaoProduto}
-          />
-        </>
+            <>
+              <Title text={"Insira a descrição do produto"} />
+              <Textarea
+                placeholder={"Descrição do produto"}
+                onChange={(ev) => setDescricaoProduto(ev.target.value)}
+                value={descricaoProduto}
+              />
+            </>
+          </div>
+          <div>
+            <>
+              <Title text={"Insira a quantidade em estoque do produto"} />
+              <InputNumber
+                required={false}
+                onChange={(ev) => setEstoqueProduto(ev.target.value)}
+                value={estoqueProduto}
+                text={"Estoque do Produto"}
+              />
+            </>
 
-        <>
-          <Title text={"Insira a quantidade em estoque do produto"} />
-          <InputNumber
-            required={false}
-            onChange={(ev) => setEstoqueProduto(ev.target.value)}
-            value={estoqueProduto}
-            text={"Estoque do Produto"}
-          />
-        </>
+            <>
+              <Title text={"Insira o link da imagem do produto"} />
+              <InputText
+                required={false}
+                onChange={(ev) => setImagemProduto(ev.target.value)}
+                value={imagemProduto}
+                text={"URL da imagem"}
+              />
+            </>
 
-        <>
-          <Title text={"Insira o link da imagem do produto"} />
-          <InputText
-            required={false}
-            onChange={(ev) => setImagemProduto(ev.target.value)}
-            value={imagemProduto}
-            text={"URL da imagem"}
-          />
-        </>
+            <>
+              <Title text={"Insira o valor do produto"} />
+              <InputNumber
+                required={false}
+                onChange={(ev) => setValorProduto(ev.target.value)}
+                value={valorProduto}
+                text={"Valor do produto"}
+              />
+            </>
+          </div>
+        </div>
 
-        <>
-          <Title text={"Insira o valor do produto"} />
-          <InputNumber
-            required={false}
-            onChange={(ev) => setValorProduto(ev.target.value)}
-            value={valorProduto}
-            text={"Valor do produto"}
-          />
-        </>
         <ButtonComponent onClick={handleSubmit} text={"Editar Produto"} />
         <Modal backdrop={backdrop} isOpen={isOpen} onClose={onClose}>
           <ModalContent>
