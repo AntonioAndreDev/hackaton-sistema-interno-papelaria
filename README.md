@@ -21,7 +21,7 @@
 * **Fazer Login:** após criar a sua conta, faça login.
 * **Crie um Produto:** adicione um novo produto.
 * **Veja os Produtos:** tenha a opção de visualizar todos os produtos cadastrados.
-
+* **Gere Relatório:** emita um relatório contendo algumas informações sobre os produtos cadastrados.
 ##
 
 ### 🟡 Como executar:
