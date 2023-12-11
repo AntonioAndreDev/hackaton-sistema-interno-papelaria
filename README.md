@@ -46,8 +46,9 @@
 
 ### 🔒 Registro (Cadastre-se)
 ### Para poder ter acesso à aplicação é necessário criar uma conta:
-* **Inclua o nome e sobrenome:** esses campos devem possuir 3 ou mais palavras únicas. Exemplo de uso correto: `nome`: Antonio `sobrenome`: Andre
-  Exemplo de uso incorreto: `nome`: Antonio Andre `sobrenome`: Sena Brilhante
+* **Inclua o nome e sobrenome:** esses campos devem possuir 3 ou mais palavras únicas.
+  * Exemplo de uso correto: `nome`: Antonio `sobrenome`: Andre
+  * Exemplo de uso incorreto: `nome`: Antonio Andre `sobrenome`: Sena Brilhante
 * **Crie uma senha:** esse campo deve obedecer aos seguintes critérios: Possuir no mínimo uma letra maiúscula e uma letra minúscula, possuir no mínimo 1 número, possuir no mínimo 6 caracteres.
 
 ##
